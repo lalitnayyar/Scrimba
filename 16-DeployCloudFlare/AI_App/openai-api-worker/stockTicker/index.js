@@ -93,6 +93,10 @@ async function fetchReport(data) {
             body: JSON.stringify(messages)
         })
         const data = await response.json()
+        
+        if (!response.ok) {
+            throw new Error(`Worker Error: ${data.error}`)
+        }
         renderReport(data.content)
     } catch (err) {
         console.error(err.message)
